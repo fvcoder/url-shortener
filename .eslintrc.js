@@ -1,4 +1,22 @@
 /** @type {import('eslint').Linter.Config} */
 module.exports = {
-  extends: ["@remix-run/eslint-config", "@remix-run/eslint-config/node"],
+	extends: ["eslint-config-codely/typescript"],
+	overrides: [
+		{
+			files: ["*.ts", "*.tsx"],
+			parserOptions: {
+				project: ["./tsconfig.json"],
+			},
+		},
+	],
+	rules: {
+		"prettier/prettier": [
+			"error",
+			{
+				endOfLine: "auto",
+				printWidth: 100,
+				useTabs: true,
+			},
+		],
+	},
 };
