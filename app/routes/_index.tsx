@@ -3,6 +3,8 @@ import { Content, Item, Portal, Root, Trigger } from "@radix-ui/react-dropdown-m
 import { json, LoaderFunction } from "@remix-run/node";
 import { Link, useLoaderData, useNavigate } from "@remix-run/react";
 
+import { AddUrl } from "~/module/ui/infra/addUrl";
+
 interface indexLoader {
 	urls: Array<{
 		id: string;
@@ -42,8 +44,8 @@ export default function Index() {
 						Aqui encontraras los links acortados, sus origenes y autores
 					</p>
 				</div>
-				<div>
-					<button className="px-4 py-2 text-white bg-blue-500 rounded-md">Add Url</button>
+				<div className="flex-none">
+					<AddUrl />
 				</div>
 			</header>
 			<main className="mt-6">

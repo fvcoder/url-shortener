@@ -18,5 +18,6 @@ module.exports = {
 				useTabs: true,
 			},
 		],
+		"import/no-unresolved": "off",
 	},
 };
