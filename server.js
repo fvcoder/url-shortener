@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const path = require("path");
 
 const { createRequestHandler } = require("@remix-run/express");
@@ -5,6 +6,7 @@ const { installGlobals } = require("@remix-run/node");
 const compression = require("compression");
 const express = require("express");
 const morgan = require("morgan");
+const { default: mongoose } = require("mongoose");
 
 installGlobals();
 
@@ -45,7 +47,6 @@ app.all(
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
-	// eslint-disable-next-line no-console
 	console.log(`Express server listening on port ${port}`);
 });
 

@@ -3,31 +3,24 @@ import { Content, Item, Portal, Root, Trigger } from "@radix-ui/react-dropdown-m
 import { json, LoaderFunction } from "@remix-run/node";
 import { Link, useLoaderData, useNavigate } from "@remix-run/react";
 
-import { AddUrl } from "~/module/ui/infra/addUrl";
+import { getAllUrls, UrlProps } from "~/module/database/app/getUrl";
+import { AddUrl, createURLaction } from "~/module/ui/infra/addUrl";
 
 interface indexLoader {
-	urls: Array<{
-		id: string;
-		slug: string;
-		original: string;
-		url: string;
-		views: number;
-		created: string;
-	}>;
+	urls: Array<Omit<UrlProps, "created"> & { url: string; created: string }>;
 }
 
-export const loader: LoaderFunction = () => {
+export const action = createURLaction;
+
+export const loader: LoaderFunction = async () => {
+	const urls = await getAllUrls();
+
 	return json<indexLoader>({
-		urls: [
-			{
-				id: "randomid",
-				slug: "sh0rt",
-				original: "https://tailwindui.com/components/application-ui/lists/tables",
-				url: "bit.com/sh0rt",
-				views: 14,
-				created: "2023-05-22T23:52:11.025Z",
-			},
-		],
+		urls: urls.map((x) => ({
+			...x,
+			url: x.slug,
+			created: x.created.toString(),
+		})),
 	});
 };
 
